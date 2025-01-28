@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de la Liga</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #1c1c1c;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+    <div class="container mx-auto p-6">
+        <h1 class="text-4xl font-bold text-center text-white mb-8">Tabla de la Liga</h1>
+        
+        <div class="overflow-x-auto">
+            <table class="min-w-full table-auto border-collapse bg-gray-800 shadow-lg rounded-lg overflow-hidden">
+                <thead>
+                    <tr class="bg-gray-900 text-white">
+                        <th class="px-4 py-2 text-xs sm:text-sm md:text-base">Posición</th>
+                        <th class="px-4 py-2 text-xs sm:text-sm md:text-base">Equipo</th>
+                        <th class="px-4 py-2 text-xs sm:text-sm md:text-base">Partidos Jugados</th>
+                        <th class="px-4 py-2 text-xs sm:text-sm md:text-base">Ganados</th>
+                        <th class="px-4 py-2 text-xs sm:text-sm md:text-base">Empatados</th>
+                        <th class="px-4 py-2 text-xs sm:text-sm md:text-base">Perdidos</th>
+                        <th class="px-4 py-2 text-xs sm:text-sm md:text-base">Goles a Favor</th>
+                        <th class="px-4 py-2 text-xs sm:text-sm md:text-base">Goles en Contra</th>
+                        <th class="px-4 py-2 text-xs sm:text-sm md:text-base">Diferencia de Gol</th>
+                        <th class="px-4 py-2 text-xs sm:text-sm md:text-base">Puntos</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-liga" class="bg-gray-700 text-center text-white">
+                    <!-- Los datos de la liga se llenarán aquí -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Función para calcular las estadísticas de los equipos
+        const calcularEstadisticas = (partidos) => {
+            const equipos = {};
+
+            partidos.forEach(partido => {
+                if (!equipos[partido.equipo1]) {
+                    equipos[partido.equipo1] = {
+                        jugados: 0,
+                        ganados: 0,
+                        empatados: 0,
+                        perdidos: 0,
+                        golesAFavor: 0,
+                        golesEnContra: 0,
+                        puntos: 0
+                    };
+                }
+                if (!equipos[partido.equipo2]) {
+                    equipos[partido.equipo2] = {
+                        jugados: 0,
+                        ganados: 0,
+                        empatados: 0,
+                        perdidos: 0,
+                        golesAFavor: 0,
+                        golesEnContra: 0,
+                        puntos: 0
+                    };
+                }
+
+                // Asegurarse de que los goles no sean null
+                if (partido.goles1 !== null && partido.goles2 !== null) {
+                    equipos[partido.equipo1].jugados++;
+                    equipos[partido.equipo2].jugados++;
+
+                    equipos[partido.equipo1].golesAFavor += partido.goles1;
+                    equipos[partido.equipo2].golesAFavor += partido.goles2;
+                    equipos[partido.equipo1].golesEnContra += partido.goles2;
+                    equipos[partido.equipo2].golesEnContra += partido.goles1;
+
+                    if (partido.goles1 > partido.goles2) {
+                        equipos[partido.equipo1].ganados++;
+                        equipos[partido.equipo2].perdidos++;
+                        equipos[partido.equipo1].puntos += 3;
+                    } else if (partido.goles1 < partido.goles2) {
+                        equipos[partido.equipo2].ganados++;
+                        equipos[partido.equipo1].perdidos++;
+                        equipos[partido.equipo2].puntos += 3;
+                    } else {
+                        equipos[partido.equipo1].empatados++;
+                        equipos[partido.equipo2].empatados++;
+                        equipos[partido.equipo1].puntos += 1;
+                        equipos[partido.equipo2].puntos += 1;
+                    }
+                }
+            });
+
+            // Calcular la diferencia de goles
+            Object.keys(equipos).forEach(equipo => {
+                equipos[equipo].diferenciaGol = equipos[equipo].golesAFavor - equipos[equipo].golesEnContra;
+            });
+
+            return equipos;
+        };
+
+        // Función para mostrar los datos en la tabla
+        const mostrarTabla = (equipos) => {
+            const tabla = document.getElementById('tabla-liga');
+            tabla.innerHTML = '';  // Limpiar la tabla
+
+            const equiposOrdenados = Object.keys(equipos).sort((a, b) => {
+                if (equipos[b].puntos !== equipos[a].puntos) {
+                    return equipos[b].puntos - equipos[a].puntos;
+                }
+                return equipos[b].diferenciaGol - equipos[a].diferenciaGol;
+            });
+
+            // Añadir posición a los equipos
+            let posicion = 1;
+
+            equiposOrdenados.forEach(equipo => {
+                const estadisticas = equipos[equipo];
+                const row = document.createElement('tr');
+                
+                // Cambiar el fondo para los primeros 4 equipos
+                if (posicion <= 4) {
+                    row.classList.add('bg-yellow-500'); // Fondo amarillo
+                } else {
+                    row.classList.add('bg-gray-700');
+                }
+
+                row.innerHTML = `
+                    <td class="px-4 py-2 text-xs sm:text-sm md:text-base">${posicion}</td>
+                    <td class="px-4 py-2 text-xs sm:text-sm md:text-base">${equipo}</td>
+                    <td class="px-4 py-2 text-xs sm:text-sm md:text-base">${estadisticas.jugados}</td>
+                    <td class="px-4 py-2 text-xs sm:text-sm md:text-base">${estadisticas.ganados}</td>
+                    <td class="px-4 py-2 text-xs sm:text-sm md:text-base">${estadisticas.empatados}</td>
+                    <td class="px-4 py-2 text-xs sm:text-sm md:text-base">${estadisticas.perdidos}</td>
+                    <td class="px-4 py-2 text-xs sm:text-sm md:text-base">${estadisticas.golesAFavor}</td>
+                    <td class="px-4 py-2 text-xs sm:text-sm md:text-base">${estadisticas.golesEnContra}</td>
+                    <td class="px-4 py-2 text-xs sm:text-sm md:text-base">${estadisticas.diferenciaGol}</td>
+                    <td class="px-4 py-2 text-xs sm:text-sm md:text-base">${estadisticas.puntos}</td>
+                `;
+                tabla.appendChild(row);
+
+                // Aumentar la posición después de añadir cada equipo
+                posicion++;
+            });
+        };
+
+        // Fetch de los datos de los partidos (simulado)
+        fetch('matches.json')
+            .then(response => response.json())
+            .then(data => {
+                const partidos = [...data.liga.primera_rueda, ...data.liga.segunda_rueda];
+                const equipos = calcularEstadisticas(partidos);
+                mostrarTabla(equipos);
+            })
+            .catch(error => console.error('Error al cargar los datos:', error));
+    </script>
+
+</body>
+</html>

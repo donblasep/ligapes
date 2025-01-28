@@ -1,0 +1,72 @@
+{
+    "liga": {
+        "primera_rueda": [
+            {"jornada": 1, "equipo1": "mati", "equipo2": "srthepolar", "goles1": null, "goles2": null},
+            {"jornada": 1, "equipo1": "platin", "equipo2": "renato casino", "goles1": null, "goles2": null},
+            {"jornada": 1, "equipo1": "vint", "equipo2": "colin flan a gun", "goles1": null, "goles2": null},
+            {"jornada": 1, "equipo1": "victor", "equipo2": "donblase", "goles1": null, "goles2": null},
+            {"jornada": 2, "equipo1": "colin flan a gun", "equipo2": "renato casino", "goles1": null, "goles2": null},
+            {"jornada": 2, "equipo1": "donblase", "equipo2": "mati", "goles1": null, "goles2": null},
+            {"jornada": 2, "equipo1": "platin", "equipo2": "victor", "goles1": null, "goles2": null},
+            {"jornada": 2, "equipo1": "srthepolar", "equipo2": "vint", "goles1": null, "goles2": null},
+            {"jornada": 3, "equipo1": "donblase", "equipo2": "platin", "goles1": null, "goles2": null},
+            {"jornada": 3, "equipo1": "renato casino", "equipo2": "srthepolar", "goles1": null, "goles2": null},
+            {"jornada": 3, "equipo1": "vint", "equipo2": "mati", "goles1": null, "goles2": null},
+            {"jornada": 3, "equipo1": "victor", "equipo2": "colin flan a gun", "goles1": null, "goles2": null},
+            {"jornada": 4, "equipo1": "colin flan a gun", "equipo2": "platin", "goles1": null, "goles2": null},
+            {"jornada": 4, "equipo1": "mati", "equipo2": "renato casino", "goles1": null, "goles2": null},
+            {"jornada": 4, "equipo1": "srthepolar", "equipo2": "victor", "goles1": null, "goles2": null},
+            {"jornada": 4, "equipo1": "vint", "equipo2": "donblase", "goles1": null, "goles2": null},
+            {"jornada": 5, "equipo1": "donblase", "equipo2": "colin flan a gun", "goles1": null, "goles2": null},
+            {"jornada": 5, "equipo1": "platin", "equipo2": "srthepolar", "goles1": null, "goles2": null},
+            {"jornada": 5, "equipo1": "renato casino", "equipo2": "vint", "goles1": null, "goles2": null},
+            {"jornada": 5, "equipo1": "victor", "equipo2": "mati", "goles1": null, "goles2": null},
+            {"jornada": 6, "equipo1": "mati", "equipo2": "donblase", "goles1": null, "goles2": null},
+            {"jornada": 6, "equipo1": "platin", "equipo2": "vint", "goles1": null, "goles2": null},
+            {"jornada": 6, "equipo1": "renato casino", "equipo2": "colin flan a gun", "goles1": null, "goles2": null},
+            {"jornada": 6, "equipo1": "srthepolar", "equipo2": "victor", "goles1": null, "goles2": null},
+            {"jornada": 7, "equipo1": "mati", "equipo2": "platin", "goles1": null, "goles2": null},
+            {"jornada": 7, "equipo1": "renato casino", "equipo2": "victor", "goles1": null, "goles2": null},
+            {"jornada": 7, "equipo1": "srthepolar", "equipo2": "donblase", "goles1": null, "goles2": null},
+            {"jornada": 7, "equipo1": "vint", "equipo2": "colin flan a gun", "goles1": null, "goles2": null}
+        ],
+        "segunda_rueda": [
+            {"jornada": 1, "equipo1": "colin flan a gun", "equipo2": "vint", "goles1": null, "goles2": null},
+            {"jornada": 1, "equipo1": "donblase", "equipo2": "victor", "goles1": null, "goles2": null},
+            {"jornada": 1, "equipo1": "renato casino", "equipo2": "platin", "goles1": null, "goles2": null},
+            {"jornada": 1, "equipo1": "srthepolar", "equipo2": "mati", "goles1": null, "goles2": null},
+            {"jornada": 2, "equipo1": "mati", "equipo2": "donblase", "goles1": null, "goles2": null},
+            {"jornada": 2, "equipo1": "renato casino", "equipo2": "colin flan a gun", "goles1": null, "goles2": null},
+            {"jornada": 2, "equipo1": "vint", "equipo2": "srthepolar", "goles1": null, "goles2": null},
+            {"jornada": 2, "equipo1": "platin", "equipo2": "victor", "goles1": null, "goles2": null},
+            {"jornada": 3, "equipo1": "donblase", "equipo2": "srthepolar", "goles1": null, "goles2": null},
+            {"jornada": 3, "equipo1": "vint", "equipo2": "mati", "goles1": null, "goles2": null},
+            {"jornada": 3, "equipo1": "platin", "equipo2": "renato casino", "goles1": null, "goles2": null},
+            {"jornada": 3, "equipo1": "victor", "equipo2": "colin flan a gun", "goles1": null, "goles2": null},
+            {"jornada": 4, "equipo1": "renato casino", "equipo2": "victor", "goles1": null, "goles2": null},
+            {"jornada": 4, "equipo1": "mati", "equipo2": "vint", "goles1": null, "goles2": null},
+            {"jornada": 4, "equipo1": "platin", "equipo2": "donblase", "goles1": null, "goles2": null},
+            {"jornada": 4, "equipo1": "srthepolar", "equipo2": "colin flan a gun", "goles1": null, "goles2": null},
+            {"jornada": 5, "equipo1": "mati", "equipo2": "victor", "goles1": null, "goles2": null},
+            {"jornada": 5, "equipo1": "srthepolar", "equipo2": "platin", "goles1": null, "goles2": null},
+            {"jornada": 5, "equipo1": "donblase", "equipo2": "renato casino", "goles1": null, "goles2": null},
+            {"jornada": 5, "equipo1": "vint", "equipo2": "colin flan a gun", "goles1": null, "goles2": null},
+            {"jornada": 6, "equipo1": "colin flan a gun", "equipo2": "mati", "goles1": null, "goles2": null},
+            {"jornada": 6, "equipo1": "victor", "equipo2": "srthepolar", "goles1": null, "goles2": null},
+            {"jornada": 6, "equipo1": "platin", "equipo2": "vint", "goles1": null, "goles2": null},
+            {"jornada": 6, "equipo1": "renato casino", "equipo2": "donblase", "goles1": null, "goles2": null},
+            {"jornada": 7, "equipo1": "mati", "equipo2": "platin", "goles1": null, "goles2": null},
+            {"jornada": 7, "equipo1": "victor", "equipo2": "vint", "goles1": null, "goles2": null},
+            {"jornada": 7, "equipo1": "donblase", "equipo2": "srthepolar", "goles1": null, "goles2": null},
+            {"jornada": 7, "equipo1": "renato casino", "equipo2": "colin flan a gun", "goles1": null, "goles2": null}
+        ]
+    },
+    "playoffs": {
+        "semifinales": [
+            {"equipo1": null, "equipo2": null, "goles1": null, "goles2": null},
+            {"equipo1": null, "equipo2": null, "goles1": null, "goles2": null}
+        ],
+        "tercer_puesto": {"equipo1": null, "equipo2": null, "goles1": null, "goles2": null},
+        "final": {"equipo1": null, "equipo2": null, "goles1": null, "goles2": null}
+    }
+}
