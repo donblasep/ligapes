@@ -1,123 +1,196 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fixture de la Liga</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Agregar un fondo que recuerde a un campo de fútbol */
-        body {
-            background-color: #1c1c1c;
-            color: #ffffff;
-        }
-        .fixture-container {
-            background-image: url('https://www.example.com/futbol-field.jpg'); /* Puedes cambiar esta URL por la de tu imagen */
-            background-size: cover;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .table-header {
-            background-color: rgba(0, 0, 0, 0.6);
-        }
+      /* Agregar un fondo que recuerde a un campo de fútbol */
+      body {
+        background: #23648c;
+        background: linear-gradient(135deg, #23648c, #1d7ecc);
+
+        color: #ffffff;
+      }
+      .fixture-container {
+        padding: 30px;
+      }
+      .table-header {
+        background-color: rgba(0, 0, 0, 0.6);
+      }
     </style>
-</head>
-<body class="font-sans">
+  </head>
+  <body class="font-sans">
     <div class="container mx-auto fixture-container">
-        <h1 class="text-4xl font-bold text-center text-white mb-8">Fixture de la Liga</h1>
-        
-        <h2 class="text-3xl font-semibold text-yellow-500 mb-4 mt-8 text-center">Primera Rueda</h2>
-        <div id="primera-rueda" class="space-y-6"></div>
-        
-        <h2 class="text-3xl font-semibold text-yellow-500 mb-4 mt-8 text-center">Segunda Rueda</h2>
-        <div id="segunda-rueda" class="space-y-6"></div>
-        
-        <h2 class="text-3xl font-semibold text-yellow-500 mb-4 mt-8 text-center">Playoffs</h2>
-        <div id="playoffs" class="space-y-6"></div>
-    </div>    
+      <h1 class="text-4xl font-bold text-center text-white mb-8">
+        Fixture de la Liga
+      </h1>
+      <div class="text-center mt-8">
+        <a href="table.html" class="inline-block bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-yellow-600 transition duration-300">
+          Ver Tabla de Posiciones
+        </a>
+      </div>
+
+      <h2 class="text-3xl font-semibold text-yellow-500 mb-4 mt-8 text-center">
+        Primera Rueda
+      </h2>
+      <div id="primera-rueda" class="space-y-6"></div>
+
+      <h2 class="text-3xl font-semibold text-yellow-500 mb-4 mt-8 text-center">
+        Segunda Rueda
+      </h2>
+      <div id="segunda-rueda" class="space-y-6"></div>
+
+      <h2 class="text-3xl font-semibold text-yellow-500 mb-4 mt-8 text-center">
+        Playoffs
+      </h2>
+      <div id="playoffs" class="space-y-6 md:max-w-lg mx-auto"></div>
+
+    </div>
 
     <script>
-        // Cargar el archivo JSON
-        fetch('matches.json')
-            .then(response => response.json())
-            .then(data => {
-                // Función para crear la tabla de jornadas
-                function crearTabla(jornadas, containerId) {
-                    const container = document.getElementById(containerId);
-                    if (Array.isArray(jornadas)) {
-                        jornadas.forEach((jornada, index) => {
-                            const table = document.createElement('table');
-                            table.classList.add('w-full', 'border-collapse', 'shadow-lg', 'rounded-lg', 'overflow-hidden', 'border-t-4', 'border-yellow-500', 'max-w-lg', 'mx-auto');
-                            
-                            const tableHeader = document.createElement('thead');
-                            const headerRow = document.createElement('tr');
-                            headerRow.classList.add('table-header');
-                            headerRow.innerHTML = `<th colspan="2" class="px-4 py-2 text-white">Jornada ${index + 1}</th>`;
-                            tableHeader.appendChild(headerRow);
-                            table.appendChild(tableHeader);
-    
-                            const tableBody = document.createElement('tbody');
-                            jornada.forEach(partido => {
-                                const row = document.createElement('tr');
-                                row.classList.add('bg-gray-800', 'text-center');
-                                row.innerHTML = ` 
-                                    <td class="px-4 py-2">${partido.equipo1}</td>
-                                    <td class="px-4 py-2">${partido.equipo2}</td>
-                                `;
-                                tableBody.appendChild(row);
-                            });
-    
-                            table.appendChild(tableBody);
-                            container.appendChild(table);
-                        });
-                    } else {
-                        console.error(`Error: La jornada no es un array. Tipo recibido: ${typeof jornadas}`);
-                    }
-                }
-    
-                // Agrupar los partidos por jornada
-                function agruparPartidosPorJornada(partidos) {
-                    const jornadas = [];
-                    partidos.forEach(partido => {
-                        const jornadaIndex = partido.jornada - 1; // Jornada empieza en 1
-                        if (!jornadas[jornadaIndex]) {
-                            jornadas[jornadaIndex] = [];
-                        }
-                        jornadas[jornadaIndex].push(partido);
-                    });
-                    return jornadas;
-                }
-    
-                // Dividir y mostrar las jornadas
-                if (data.liga.primera_rueda) {
-                    const primeraRueda = agruparPartidosPorJornada(data.liga.primera_rueda);
-                    crearTabla(primeraRueda, 'primera-rueda');
-                }
-                if (data.liga.segunda_rueda) {
-                    const segundaRueda = agruparPartidosPorJornada(data.liga.segunda_rueda);
-                    crearTabla(segundaRueda, 'segunda-rueda');
-                }
-    
-                // Mostrar los playoffs (si se desea completar más adelante)
-                const playoffs = data.playoffs;
-                const playoffsContainer = document.getElementById('playoffs');
-                
-                Object.keys(playoffs).forEach(etapa => {
-                    const etapaContainer = document.createElement('div');
-                    etapaContainer.innerHTML = `<h3 class="text-2xl font-semibold text-yellow-400 mb-3">${etapa}</h3>`;
-                    playoffs[etapa].forEach(partido => {
-                        const partidoDiv = document.createElement('div');
-                        partidoDiv.innerHTML = `${partido.equipo1 ? partido.equipo1 : 'Por determinar'} vs ${partido.equipo2 ? partido.equipo2 : 'Por determinar'}`;
-                        partidoDiv.classList.add('text-white', 'mb-2');
-                        etapaContainer.appendChild(partidoDiv);
-                    });
-                    playoffsContainer.appendChild(etapaContainer);
+      // Cargar el archivo JSON
+      fetch("matches.json")
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Datos cargados:", data); // Mensaje de depuración
+
+          // Función para crear la tabla de jornadas
+          function crearTabla(jornadas, containerId) {
+            const container = document.getElementById(containerId);
+            if (Array.isArray(jornadas)) {
+              jornadas.forEach((jornada, index) => {
+                const table = document.createElement("table");
+                table.classList.add(
+                  "w-full",
+                  "border-collapse",
+                  "shadow-lg",
+                  "rounded-lg",
+                  "overflow-hidden",
+                  "border-t-4",
+                  "border-yellow-500",
+                  "max-w-lg",
+                  "mx-auto"
+                );
+
+                const tableHeader = document.createElement("thead");
+                const headerRow = document.createElement("tr");
+                headerRow.classList.add("table-header");
+                headerRow.innerHTML = `<th colspan="2" class="px-4 py-2 text-white">Jornada ${
+                  index + 1
+                }</th>`;
+                tableHeader.appendChild(headerRow);
+
+                const tableBody = document.createElement("tbody");
+                jornada.forEach((partido) => {
+                  const row = document.createElement("tr");
+                  row.classList.add("bg-gray-800", "text-center", "flex", "justify-center");
+
+                  // Determinar el fondo según el resultado
+                  const ganador1 = partido.goles1 > partido.goles2 ? "bg-green-500" : (partido.goles1 < partido.goles2 ? "bg-red-500" : "");
+                  const ganador2 = partido.goles2 > partido.goles1 ? "bg-green-500" : (partido.goles2 < partido.goles1 ? "bg-red-500" : "");
+
+                  row.innerHTML = ` 
+                    <td class="px-4 py-2 flex-1 ${ganador1}">${partido.equipo1}</td>
+                    <td class="px-4 py-2 flex-1">${partido.goles1 !== null ? partido.goles1 : "0"}:${partido.goles2 !== null ? partido.goles2 : "0"}</td>
+                    <td class="px-4 py-2 flex-1 ${ganador2}">${partido.equipo2}</td>
+                  `;
+                  tableBody.appendChild(row);
                 });
-            })
-            .catch(error => {
-                console.error('Error al cargar el archivo JSON:', error);
+
+                table.appendChild(tableBody);
+
+                // Mensaje de depuración para cada jornada
+                console.log(
+                  `Creando tabla para la jornada ${index + 1}`,
+                  jornada
+                );
+                container.appendChild(table);
+              });
+            } else {
+              console.error(
+                `Error: La jornada no es un array. Tipo recibido: ${typeof jornadas}`
+              );
+            }
+          }
+
+          // Agrupar los partidos por jornada
+          function agruparPartidosPorJornada(partidos) {
+            const jornadas = [];
+            partidos.forEach((partido) => {
+              const jornadaIndex = partido.jornada - 1; // Jornada empieza en 1
+              if (!jornadas[jornadaIndex]) {
+                jornadas[jornadaIndex] = [];
+              }
+              jornadas[jornadaIndex].push(partido);
             });
+            return jornadas;
+          }
+
+          // Dividir y mostrar las jornadas
+          if (data.liga.primera_rueda) {
+            const primeraRueda = agruparPartidosPorJornada(
+              data.liga.primera_rueda
+            );
+            crearTabla(primeraRueda, "primera-rueda");
+          }
+          if (data.liga.segunda_rueda) {
+            const segundaRueda = agruparPartidosPorJornada(
+              data.liga.segunda_rueda
+            );
+            crearTabla(segundaRueda, "segunda-rueda");
+          }
+
+          // Mostrar los playoffs
+          const playoffs = data.playoffs;
+          const playoffsContainer = document.getElementById("playoffs");
+
+          Object.keys(playoffs).forEach((etapa) => {
+            const etapaContainer = document.createElement("div");
+            etapaContainer.classList.add("mb-6", "p-4", "bg-gray-900", "rounded-lg", "shadow-lg");
+            etapaContainer.innerHTML = `<h3 class="text-2xl font-semibold text-yellow-400 mb-3">${etapa}</h3>`;
+
+            // Verificar si la etapa es un array antes de iterar
+            if (Array.isArray(playoffs[etapa])) {
+              playoffs[etapa].forEach((partido) => {
+                const partidoDiv = document.createElement("div");
+                partidoDiv.classList.add("flex", "justify-between", "items-center", "bg-gray-800", "p-4", "rounded-lg", "mb-2");
+                partidoDiv.innerHTML = `
+                  <div class="flex-1 text-white">
+                    <span class="font-bold">${partido.equipo1 ? partido.equipo1 : "Por determinar"}</span>
+                    <span class="text-yellow-500"> vs </span>
+                    <span class="font-bold">${partido.equipo2 ? partido.equipo2 : "Por determinar"}</span>
+                  </div>
+                  <div class="text-yellow-500 font-bold">
+                    ${partido.goles1 !== null ? partido.goles1 : "0"} : ${partido.goles2 !== null ? partido.goles2 : "0"}
+                  </div>
+                `;
+                etapaContainer.appendChild(partidoDiv);
+              });
+            } else {
+              // Manejar el caso donde no es un array (por ejemplo, "tercer_puesto" y "final")
+              const partidoDiv = document.createElement("div");
+              partidoDiv.classList.add("flex", "justify-between", "items-center", "bg-gray-800", "p-4", "rounded-lg", "mb-2");
+              partidoDiv.innerHTML = `
+                <div class="flex-1 text-white">
+                  <span class="font-bold">${playoffs[etapa].equipo1 ? playoffs[etapa].equipo1 : "Por determinar"}</span>
+                  <span class="text-yellow-500"> vs </span>
+                  <span class="font-bold">${playoffs[etapa].equipo2 ? playoffs[etapa].equipo2 : "Por determinar"}</span>
+                </div>
+                <div class="text-yellow-500 font-bold">
+                  ${playoffs[etapa].goles1 !== null ? playoffs[etapa].goles1 : "0"} : ${playoffs[etapa].goles2 !== null ? playoffs[etapa].goles2 : "0"}
+                </div>
+              `;
+              etapaContainer.appendChild(partidoDiv);
+            }
+
+            playoffsContainer.appendChild(etapaContainer);
+          });
+        })
+        .catch((error) => {
+          console.error("Error al cargar el archivo JSON:", error);
+        });
     </script>
-</body>
+  </body>
 </html>
